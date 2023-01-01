@@ -28,6 +28,7 @@ import {
   getId,
   getPathParams,
 } from '../../utils/generateParams.utils';
+import { HEADERS } from '../../utils/response-headers';
 
 export const generateRequest = async (
   req: IncomingMessage,
@@ -61,25 +62,25 @@ export const generateRequest = async (
     case 'daily-wage':
       generateDailyWage(employmentType, salaryPerHour);
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.writeHead(200, HEADERS);
       return 'Successfully generated Employee Daily Wage';
 
     case 'remaining-leaves':
       generateRemainingLeaves(employeeLeaves, allocateLeaves);
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.writeHead(200, HEADERS);
       return 'Successfully generated Employee Remaining Leaves';
 
     case 'total-absences':
       getTotalDayOffs(employeeAbsences, 'set');
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.writeHead(200, HEADERS);
       return 'Successfully generated Employee Total Absences';
 
     case 'total-overtime':
       generateTotalOvertime(employeeOvertime, 'approved');
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.writeHead(200, HEADERS);
       return 'Successfully generated Employee Total Overtime';
 
     case 'monthly-salary':

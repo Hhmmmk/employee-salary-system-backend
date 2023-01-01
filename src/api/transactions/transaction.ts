@@ -27,6 +27,7 @@ import {
   Overtime,
   putOvertime,
 } from '../../modules/transactions/transaction-type/overtime.module';
+import { HEADERS } from '../../utils/response-headers';
 
 export const transactionRequest = async (
   req: IncomingMessage,
@@ -72,7 +73,7 @@ export const transactionRequest = async (
           // Insert new transaction to database
           putTransaction(absenceData);
 
-          res.writeHead(201, { 'Content-Type': 'application/json' });
+          res.writeHead(201, HEADERS);
           return 'Successfully created new Absence data';
 
         case TRANSACTION_TYPE.leave: // Add leave
@@ -87,7 +88,7 @@ export const transactionRequest = async (
           // Insert new transaction to database
           putTransaction(leaveData);
 
-          res.writeHead(201, { 'Content-Type': 'application/json' });
+          res.writeHead(201, HEADERS);
           return 'Successfully created new Leave data';
 
         case TRANSACTION_TYPE.overtime: // Add overtime
@@ -105,14 +106,14 @@ export const transactionRequest = async (
           // Insert new transaction to database
           putTransaction(overtimeData);
 
-          res.writeHead(201, { 'Content-Type': 'application/json' });
+          res.writeHead(201, HEADERS);
           return 'Successfully created new Overtime data';
 
         default:
           break;
       }
 
-      res.writeHead(201, { 'Content-Type': 'application/json' });
+      res.writeHead(201, HEADERS);
       return 'Successfully created new Transaction';
 
     case 'GET': //--> GET TRANSACTION <--//
@@ -122,7 +123,7 @@ export const transactionRequest = async (
       // Get transaction from database
       getTransaction(employeeId, getResult.transactionId);
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.writeHead(200, HEADERS);
       return 'Successfully retrieved Transaction data';
 
     case 'DELETE': //--> DELETE TRANSACTION <--//
@@ -132,7 +133,7 @@ export const transactionRequest = async (
       // Delete transaction from database
       deleteTransaction(employeeId, deleteResult.transactionId);
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.writeHead(200, HEADERS);
       return 'Successfully deleted Transaction data';
 
     default:

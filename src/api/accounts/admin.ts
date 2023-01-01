@@ -14,6 +14,7 @@ import {
   deleteAccount,
   putAccount,
 } from '../../modules/accounts/account.module';
+import { HEADERS } from '../../utils/response-headers';
 
 export const adminRequest = async (
   req: IncomingMessage,
@@ -42,7 +43,7 @@ export const adminRequest = async (
       // Insert updated profile to database
       putAccount({ ...putResult.profile });
 
-      res.writeHead(201, { 'Content-Type': 'application/json' });
+      res.writeHead(201, HEADERS);
       return 'Successfully updated Admin data';
 
     case 'GET': //--> GET ADMIN <--//
@@ -54,7 +55,7 @@ export const adminRequest = async (
       // Get admin data from database
       getAdmin(adminId, getResult.accountId);
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.writeHead(200, HEADERS);
       return 'Successfully retrieved Admin data';
 
     case 'DELETE': //--> DELETE ADMIN <--//
@@ -70,7 +71,7 @@ export const adminRequest = async (
       // Delete account data from database
       deleteAccount(deleteResult.accountId, deleteResult.firstName);
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.writeHead(200, HEADERS);
       return 'Successfully deleted Admin data';
 
     default:

@@ -14,6 +14,7 @@ import {
   getAbsence,
   putAbsence,
 } from '../../modules/transactions/transaction-type/absence.module';
+import { HEADERS } from '../../utils/response-headers';
 
 export const absenceRequest = async (
   req: IncomingMessage,
@@ -45,7 +46,7 @@ export const absenceRequest = async (
       // Insert updated transaction data to database
       putTransaction(updatedData);
 
-      res.writeHead(201, { 'Content-Type': 'application/json' });
+      res.writeHead(201, HEADERS);
       return 'Successfully updated Absence data';
 
     case 'GET': //--> GET ABSENCE <--//
@@ -55,7 +56,7 @@ export const absenceRequest = async (
       // Get absence data from database
       getAbsence(employeeId, getResult.transactionId);
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.writeHead(200, HEADERS);
       return 'Successfully retrieved Absence data';
 
     case 'DELETE': //--> DELETE ABSENCE <--//
@@ -68,7 +69,7 @@ export const absenceRequest = async (
       // Delete transaction data from database
       deleteTransaction(employeeId, deleteResult.transactionId);
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.writeHead(200, HEADERS);
       return 'Successfully deleted Absence data';
 
     default:

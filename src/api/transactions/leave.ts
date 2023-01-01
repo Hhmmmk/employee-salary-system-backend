@@ -14,6 +14,7 @@ import {
   getLeave,
   putLeave,
 } from '../../modules/transactions/transaction-type/leave.module';
+import { HEADERS } from '../../utils/response-headers';
 
 export const leaveRequest = async (
   req: IncomingMessage,
@@ -45,7 +46,7 @@ export const leaveRequest = async (
       // Insert updated transaction data to database
       putTransaction(updatedData);
 
-      res.writeHead(201, { 'Content-Type': 'application/json' });
+      res.writeHead(201, HEADERS);
       return 'Successfully updated Leave data';
 
     case 'GET': //--> GET LEAVE <--//
@@ -55,7 +56,7 @@ export const leaveRequest = async (
       // Get leave data to database
       getLeave(employeeId, getResult.transactionId);
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.writeHead(200, HEADERS);
       return 'Successfully retrieved Leave data';
 
     case 'DELETE': //--> DELETE LEAVE <--//
@@ -68,7 +69,7 @@ export const leaveRequest = async (
       // Delete transaction data from database
       deleteTransaction(employeeId, deleteResult.transactionId);
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.writeHead(200, HEADERS);
       return 'Successfully deleted Leave data';
 
     default:

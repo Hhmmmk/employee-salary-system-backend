@@ -11,6 +11,7 @@ import {
   retrieveEmployeeLeaves,
   retrieveEmployeeOvertime,
 } from '../../modules/actions/retrieve.module';
+import { HEADERS } from '../../utils/response-headers';
 
 export const retrieveRequest = async (
   req: IncomingMessage,
@@ -25,25 +26,25 @@ export const retrieveRequest = async (
     case 'employee-transactions':
       retrieveEmployeeTransactions(employeeId);
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.writeHead(200, HEADERS);
       return 'Successfully retrieved Employee Transactions List';
 
     case 'employee-absence':
       retrieveEmployeeAbsence(employeeId);
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.writeHead(200, HEADERS);
       return 'Successfully retrieved Employee Absence List';
 
     case 'employee-leaves':
       retrieveEmployeeLeaves(employeeId);
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.writeHead(200, HEADERS);
       return 'Successfully retrieved Employee Leaves List';
 
     case 'employee-overtime':
       retrieveEmployeeOvertime(employeeId);
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.writeHead(200, HEADERS);
       return 'Successfully retrieved Employee Overtime List';
 
     default:

@@ -13,6 +13,7 @@ import {
   deleteTransaction,
   putTransaction,
 } from '../../modules/transactions/transactions.module';
+import { HEADERS } from '../../utils/response-headers';
 
 export const overtimeRequest = async (
   req: IncomingMessage,
@@ -45,7 +46,7 @@ export const overtimeRequest = async (
       // Insert updated transaction data to database
       putTransaction(updatedData);
 
-      res.writeHead(201, { 'Content-Type': 'application/json' });
+      res.writeHead(201, HEADERS);
       return 'Successfully updated Overtime';
 
     case 'GET': //--> GET OVERTIME <--//
@@ -55,7 +56,7 @@ export const overtimeRequest = async (
       // Get overtime data from database
       getOvertime(employeeId, getResult.transactionId);
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.writeHead(200, HEADERS);
       return 'Successfully retrieved Overtime data.';
 
     case 'DELETE': //--> DELETE OVERTIME <--//
@@ -68,7 +69,7 @@ export const overtimeRequest = async (
       // Delete transaction data from database
       deleteTransaction(employeeId, deleteResult.transactionId);
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.writeHead(200, HEADERS);
       return 'Successfully deleted Overtime data';
 
     default:

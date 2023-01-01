@@ -14,6 +14,7 @@ import {
   deleteAccount,
   putAccount,
 } from '../../modules/accounts/account.module';
+import { HEADERS } from '../../utils/response-headers';
 
 export const employerRequest = async (
   req: IncomingMessage,
@@ -44,7 +45,7 @@ export const employerRequest = async (
       // Insert updated profile to database
       putAccount({ ...putResult.profile });
 
-      res.writeHead(201, { 'Content-Type': 'application/json' });
+      res.writeHead(201, HEADERS);
       return 'Successfully updated Employer data';
 
     case 'GET': //--> GET EMPLOYER <--//
@@ -56,7 +57,7 @@ export const employerRequest = async (
       // Get employer data to database
       getEmployer(employerId, getResult.accountId);
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.writeHead(200, HEADERS);
       return 'Successfully retrieved Employer data';
 
     case 'DELETE': //--> DELETE EMPLOYER <--//
@@ -72,7 +73,7 @@ export const employerRequest = async (
       // Delete account data from database
       deleteAccount(deleteResult.accountId, deleteResult.firstName);
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.writeHead(200, HEADERS);
       return 'Successfully deleted Employer data';
 
     default:
